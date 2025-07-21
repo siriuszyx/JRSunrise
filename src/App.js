@@ -161,7 +161,7 @@ const App = () => {
         <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
           <div className="flex items-center gap-3 mb-8">
             <Train className="text-blue-600" size={32} />
-            <h1 className="text-3xl font-bold text-gray-800">JR Sunrise Train Booking</h1>
+            <h1 className="text-3xl font-bold text-gray-800">JR Sunrise Express Availability Checking</h1>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -201,7 +201,7 @@ const App = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-gray-700 font-medium">
                 <MapPin size={20} />
-                <span>Stations</span>
+                <span>Route</span>
               </div>
               <div className="space-y-3">
                 <div>
