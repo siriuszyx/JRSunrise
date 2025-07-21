@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Train, MapPin, Clock, ExternalLink } from 'lucide-react';
 import './App.css';
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   const [startDate, setStartDate] = useState('');
@@ -27,28 +28,28 @@ const App = () => {
   useEffect(() => {
     const now = new Date();
     const jstOffset = 9 * 60; // GMT+9 in minutes
-    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-    const jst = new Date(utc + (jstOffset * 60000));
-    
-    let startFromDate = new Date(jst);
-    
-    // If current JST time is after 11pm, start from tomorrow
-    if (jst.getHours() >= 23) {
-      startFromDate.setDate(startFromDate.getDate() + 1);
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const jstNow = new Date(utc + jstOffset * 60000);
+  
+    // Determine REFERENCE DAY
+    let referenceDay = new Date(jstNow);
+    if (jstNow.getHours() >= 23) {
+      referenceDay.setDate(referenceDay.getDate() + 1);
     }
-    
-    // Calculate max date (one month from start date)
-    const maxFromDate = new Date(startFromDate);
-    maxFromDate.setMonth(maxFromDate.getMonth() + 1);
-    
-    const formatDate = (date) => {
-      return date.toISOString().split('T')[0];
-    };
-    
-    setMinDate(formatDate(startFromDate));
-    setMaxDate(formatDate(maxFromDate));
-    setStartDate(formatDate(startFromDate));
+  
+    // Format date as YYYY-MM-DD
+    const formatDate = (date) => date.toISOString().split('T')[0];
+  
+    const min = new Date(referenceDay);
+    const max = new Date(referenceDay);
+    max.setMonth(max.getMonth() + 1); // One calendar month from REFERENCE DAY
+  
+    setMinDate(formatDate(min));
+    setMaxDate(formatDate(max));
+    setStartDate(formatDate(min));
+    setEndDate(formatDate(min));
   }, []);
+
 
   // Update available destinations when origin changes
   useEffect(() => {
@@ -60,19 +61,35 @@ const App = () => {
 
   // Update end date when start date changes
   useEffect(() => {
-    if (startDate) {
+    if (startDate && minDate) {
       const start = new Date(startDate);
-      const maxEnd = new Date(start);
-      maxEnd.setMonth(maxEnd.getMonth() + 1);
-      
-      setMaxDate(maxEnd.toISOString().split('T')[0]);
-      
-      // If end date is before start date, reset it
-      if (endDate && new Date(endDate) < start) {
-        setEndDate(startDate);
+      const reference = new Date(minDate);
+      const maxAllowed = new Date(reference);
+      maxAllowed.setMonth(maxAllowed.getMonth() + 1);
+  
+      // Clamp startDate if out of range
+      if (start < reference) {
+        setStartDate(minDate);
+        return;
       }
+      if (start > maxAllowed) {
+        setStartDate(formatDate(maxAllowed));
+        return;
+      }
+
+    // Adjust endDate limits
+    const newMaxEnd = new Date(start);
+    newMaxEnd.setMonth(newMaxEnd.getMonth() + 1);
+    const end = new Date(endDate);
+
+    setMaxDate(formatDate(newMaxEnd));
+
+    if (end < start) {
+      setEndDate(formatDate(start));
     }
-  }, [startDate]);
+  }
+}, [startDate, minDate]);
+
 
   const formatDateForBackend = (dateStr) => {
     return dateStr.replace(/-/g, '');
@@ -117,7 +134,7 @@ const App = () => {
       };
 
       console.log('Sending to backend:', data);
-      const results = await check(data);
+      const results = await checkAvailability(data);
       setSearchResults(results);
     } catch (error) {
       console.error('Error searching:', error);
