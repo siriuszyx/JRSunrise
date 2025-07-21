@@ -24,6 +24,9 @@ const App = () => {
     "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"]
   };
 
+  // Format date as YYYY-MM-DD
+  const formatDate = (date) => date.toISOString().split('T')[0];
+
   // Set minimum and maximum dates based on GMT+9 timezone
   useEffect(() => {
     const now = new Date();
@@ -36,10 +39,7 @@ const App = () => {
     if (jstNow.getHours() >= 23) {
       referenceDay.setDate(referenceDay.getDate() + 1);
     }
-  
-    // Format date as YYYY-MM-DD
-    const formatDate = (date) => date.toISOString().split('T')[0];
-  
+
     const min = new Date(referenceDay);
     const max = new Date(referenceDay);
     max.setMonth(max.getMonth() + 1); // One calendar month from REFERENCE DAY
