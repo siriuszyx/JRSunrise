@@ -1,14 +1,3 @@
 {
-  "version": 2,
-  "functions": {
-    "api/check-availability.py": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "version": 2
 }
