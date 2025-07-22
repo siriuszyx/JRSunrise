@@ -179,7 +179,18 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 relative">
+      {/* Loading overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 flex flex-col items-center shadow-2xl">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent mb-4"></div>
+            <p className="text-gray-700 font-medium text-lg">Searching for available trains...</p>
+            <p className="text-gray-500 text-sm mt-2">This may take a few moments</p>
+          </div>
+        </div>
+      )}
+      
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
           <div className="flex items-center gap-3 mb-8">
