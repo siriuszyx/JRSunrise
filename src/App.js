@@ -22,8 +22,8 @@ const App = () => {
     "Tokyo": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Yokohama": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Osaka": ["Takamatsu", "Izumoshi"],
-    "Takamatsu": ["Okayama", "Osaka", "Tokyo"],
-    "Izumoshi": ["Okayama", "Osaka", "Tokyo"],
+    "Takamatsu": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
+    "Izumoshi": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
     "Himeji": ["Tokyo", "Takamatsu", "Izumoshi"],
     "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"]
   };
