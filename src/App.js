@@ -16,16 +16,16 @@ const App = () => {
   const [minEndDate, setMinEndDate] = useState('');
   const [maxEndDate, setMaxEndDate] = useState('');
 
-  const originStations = ["Tokyo", "Osaka", "Takamatsu", "Izumoshi"];
+  const originStations = ["Tokyo", "Yokohama", "Osaka", "Himeji", "Okayama", "Takamatsu", "Izumoshi"];
 
   const destinationLogic = {
     "Tokyo": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Yokohama": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Osaka": ["Takamatsu", "Izumoshi"],
-    "Takamatsu": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
-    "Izumoshi": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
     "Himeji": ["Tokyo", "Takamatsu", "Izumoshi"],
-    "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"]
+    "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"],
+    "Takamatsu": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
+    "Izumoshi": ["Okayama", "Osaka", "Yokohama", "Tokyo"]
   };
 
   // Format date as YYYY-MM-DD
