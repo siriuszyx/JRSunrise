@@ -19,10 +19,11 @@ const App = () => {
   const originStations = ["Tokyo", "Osaka", "Takamatsu", "Izumoshi"];
 
   const destinationLogic = {
-    "Tokyo": ["Okayama", "Takamatsu", "Izumoshi"],
+    "Tokyo": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Osaka": ["Takamatsu", "Izumoshi"],
     "Takamatsu": ["Okayama", "Osaka", "Tokyo"],
     "Izumoshi": ["Okayama", "Osaka", "Tokyo"],
+    "Himeji": ["Tokyo", "Takamatsu", "Izumoshi"]
     "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"]
   };
 
