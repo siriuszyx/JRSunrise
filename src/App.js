@@ -11,8 +11,10 @@ const App = () => {
   const [availableDestinations, setAvailableDestinations] = useState([]);
   const [searchResults, setSearchResults] = useState({});
   const [loading, setLoading] = useState(false);
-  const [minDate, setMinDate] = useState('');
-  const [maxDate, setMaxDate] = useState('');
+  const [minStartDate, setMinStartDate] = useState('');
+  const [maxStartDate, setMaxStartDate] = useState('');
+  const [minEndDate, setMinEndDate] = useState('');
+  const [maxEndDate, setMaxEndDate] = useState('');
 
   const originStations = ["Tokyo", "Osaka", "Takamatsu", "Izumoshi"];
 
@@ -34,22 +36,26 @@ const App = () => {
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
     const jstNow = new Date(utc + jstOffset * 60000);
   
-    // Determine REFERENCE DAY
+    // Determine REFERENCE DAY: tomorrow if after 11 PM (23:00), otherwise today
     let referenceDay = new Date(jstNow);
     if (jstNow.getHours() >= 23) {
       referenceDay.setDate(referenceDay.getDate() + 1);
     }
 
-    const min = new Date(referenceDay);
-    const max = new Date(referenceDay);
-    max.setMonth(max.getMonth() + 1); // One calendar month from REFERENCE DAY
+    // Start date: reference day to one month from reference day (inclusive)
+    const startMin = new Date(referenceDay);
+    const startMax = new Date(referenceDay);
+    startMax.setMonth(startMax.getMonth() + 1);
   
-    setMinDate(formatDate(min));
-    setMaxDate(formatDate(max));
-    setStartDate(formatDate(min));
-    setEndDate(formatDate(min));
+    setMinStartDate(formatDate(startMin));
+    setMaxStartDate(formatDate(startMax));
+    setStartDate(formatDate(startMin));
+    
+    // Initially set end date same as start date
+    setMinEndDate(formatDate(startMin));
+    setMaxEndDate(formatDate(startMax));
+    setEndDate(formatDate(startMin));
   }, []);
-
 
   // Update available destinations when origin changes
   useEffect(() => {
@@ -59,37 +65,37 @@ const App = () => {
     }
   }, [originStation]);
 
-  // Update end date when start date changes
+  // Update end date restrictions when start date changes
   useEffect(() => {
-    if (startDate && minDate) {
+    if (startDate && minStartDate) {
       const start = new Date(startDate);
-      const reference = new Date(minDate);
-      const maxAllowed = new Date(reference);
-      maxAllowed.setMonth(maxAllowed.getMonth() + 1);
+      const referenceStart = new Date(minStartDate);
+      const oneMonthFromReference = new Date(referenceStart);
+      oneMonthFromReference.setMonth(oneMonthFromReference.getMonth() + 1);
   
-      // Clamp startDate if out of range
-      if (start < reference) {
-        setStartDate(minDate);
+      // Clamp startDate if somehow out of range
+      if (start < referenceStart) {
+        setStartDate(minStartDate);
         return;
       }
-      if (start > maxAllowed) {
-        setStartDate(formatDate(maxAllowed));
+      if (start > oneMonthFromReference) {
+        setStartDate(formatDate(oneMonthFromReference));
         return;
       }
 
-    // Adjust endDate limits
-    const newMaxEnd = new Date(start);
-    newMaxEnd.setMonth(newMaxEnd.getMonth() + 1);
-    const end = new Date(endDate);
+      // End date restrictions: from startDate to one month from reference day (inclusive)
+      setMinEndDate(formatDate(start));
+      setMaxEndDate(formatDate(oneMonthFromReference));
 
-    setMaxDate(formatDate(newMaxEnd));
-
-    if (end < start) {
-      setEndDate(formatDate(start));
+      // Adjust endDate if it's now out of range
+      const currentEnd = new Date(endDate);
+      if (currentEnd < start) {
+        setEndDate(formatDate(start));
+      } else if (currentEnd > oneMonthFromReference) {
+        setEndDate(formatDate(oneMonthFromReference));
+      }
     }
-  }
-}, [startDate, minDate]);
-
+  }, [startDate, minStartDate, endDate]);
 
   const formatDateForBackend = (dateStr) => {
     return dateStr.replace(/-/g, '');
@@ -195,8 +201,8 @@ const App = () => {
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    min={minDate}
-                    max={maxDate}
+                    min={minStartDate}
+                    max={maxStartDate}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -206,8 +212,8 @@ const App = () => {
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    min={startDate || minDate}
-                    max={maxDate}
+                    min={minEndDate}
+                    max={maxEndDate}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
