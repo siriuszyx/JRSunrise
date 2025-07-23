@@ -50,7 +50,7 @@ const App = () => {
             }
         },
         ja: {
-            title: "JR 「サンライズ瀬戸」 「サンライズ出雲」 空席確認",
+            title: "JR 寝台列車「サンライズ出雲・瀬戸」空席確認",
             travelDates: "乗車日",
             startDate: "出発日",
             endDate: "最終日",
