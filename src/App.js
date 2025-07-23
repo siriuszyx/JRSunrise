@@ -49,7 +49,7 @@ const App = () => {
       }
     },
     ja: {
-      title: "JR サンライズエクスプレス 空席確認",
+      title: "JR 「サンライズ瀬戸」 「サンライズ出雲」 空席確認",
       travelDates: "乗車日",
       startDate: "出発日",
       endDate: "最終日",
@@ -111,7 +111,7 @@ const App = () => {
       }
     },
     'zh-tw': {
-      title: "JR「サンライズ瀬戸・出雲」列車 座位查詢",
+      title: "JR「Sunrise瀬戸・出雲」列車 座位查詢",
       travelDates: "旅行日期",
       startDate: "開始日期",
       endDate: "結束日期",
