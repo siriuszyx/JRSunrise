@@ -39,7 +39,9 @@ const App = () => {
       stations: {
         "Tokyo": "Tokyo",
         "Yokohama": "Yokohama",
+        "Shizuoka": "Shizuoka",
         "Osaka": "Osaka",
+        "Sannomiya": "Sannomiya",
         "Himeji": "Himeji",
         "Okayama": "Okayama",
         "Takamatsu": "Takamatsu",
@@ -68,7 +70,9 @@ const App = () => {
       stations: {
         "Tokyo": "東京",
         "Yokohama": "横浜",
+        "Shizuoka": "静岡",
         "Osaka": "大阪",
+        "Sannomiya": "三宮",
         "Himeji": "姫路",
         "Okayama": "岡山",
         "Takamatsu": "高松",
@@ -97,7 +101,9 @@ const App = () => {
       stations: {
         "Tokyo": "东京",
         "Yokohama": "横滨",
+        "Shizuoka": "静冈",
         "Osaka": "大阪",
+        "Sannomiya": "三宫",
         "Himeji": "姬路",
         "Okayama": "冈山",
         "Takamatsu": "高松",
@@ -126,7 +132,9 @@ const App = () => {
       stations: {
         "Tokyo": "東京",
         "Yokohama": "橫濱",
+        "Shizuoka": "靜岡",
         "Osaka": "大阪",
+        "Sannomiya": "三宮",
         "Himeji": "姬路",
         "Okayama": "岡山",
         "Takamatsu": "高松",
@@ -144,13 +152,15 @@ const App = () => {
 
   const t = translations[language];
 
-  const originStations = ["Tokyo", "Yokohama", "Osaka", "Himeji", "Okayama", "Takamatsu", "Izumoshi"];
+  const originStations = ["Tokyo", "Yokohama", "Shizuoka", "Osaka", "Sannomiya", "Himeji", "Okayama", "Takamatsu", "Izumoshi"];
 
   const destinationLogic = {
     "Tokyo": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Yokohama": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
-    "Osaka": ["Takamatsu", "Izumoshi"],
-    "Himeji": ["Tokyo", "Takamatsu", "Izumoshi"],
+    "Shizuoka": ["Yokohama", "Tokyo", "Himeji", "Okayama", "Takamatsu", "Izumoshi"],
+    "Osaka": ["Takamatsu", "Izumoshi", "Shizuoka", "Yokohama", "Tokyo"],
+    "Sannomiya": ["Takamatsu", "Izumoshi", "Shizuoka", "Yokohama", "Tokyo"], 
+    "Himeji": ["Sannomiya", "Osaka", "Shizuoka", "Yokohama", "Tokyo", "Takamatsu", "Izumoshi"],
     "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"],
     "Takamatsu": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
     "Izumoshi": ["Okayama", "Osaka", "Yokohama", "Tokyo"]
