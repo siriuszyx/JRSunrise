@@ -158,12 +158,12 @@ const App = () => {
     "Tokyo": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Yokohama": ["Himeji", "Okayama", "Takamatsu", "Izumoshi"],
     "Shizuoka": ["Yokohama", "Tokyo", "Himeji", "Okayama", "Takamatsu", "Izumoshi"],
-    "Osaka": ["Takamatsu", "Izumoshi", "Shizuoka", "Yokohama", "Tokyo"],
-    "Sannomiya": ["Takamatsu", "Izumoshi", "Shizuoka", "Yokohama", "Tokyo"], 
+    "Osaka": ["Takamatsu", "Izumoshi", "Okayama", "Himeji", "Shizuoka", "Yokohama", "Tokyo"],
+    "Sannomiya": ["Takamatsu", "Izumoshi", "Okayama", "Himeji", "Shizuoka", "Yokohama", "Tokyo"], 
     "Himeji": ["Sannomiya", "Osaka", "Shizuoka", "Yokohama", "Tokyo", "Takamatsu", "Izumoshi"],
-    "Okayama": ["Tokyo", "Takamatsu", "Izumoshi"],
-    "Takamatsu": ["Okayama", "Osaka", "Yokohama", "Tokyo"],
-    "Izumoshi": ["Okayama", "Osaka", "Yokohama", "Tokyo"]
+    "Okayama": ["Takamatsu", "Izumoshi", "Tokyo", "Yokohama", "Shizuoka", "Osaka", "Sannomiya"],
+    "Takamatsu": ["Okayama", "Sannomiya", "Osaka", "Shizuoka", "Yokohama", "Tokyo"],
+    "Izumoshi": ["Okayama", "Sannomiya", "Osaka", "Shizuoka", "Yokohama", "Tokyo"]
   };
 
   // Format date as YYYY-MM-DD
