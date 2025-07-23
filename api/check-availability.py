@@ -130,7 +130,7 @@ def checkAvailability(data):
     # Generate departHour
     if departStName[:5] in ("Sanno", "Osaka", "Shizu"):
         departHour = "00"
-    elif departStName[:5] in ("Okayam", "Himeji") and arriveStName[:8] in ("Takamats", "Izumoshi"):
+    elif departStName[:6] in ("Okayam", "Himeji") and arriveStName[:8] in ("Takamats", "Izumoshi"):
         departHour = "05"
               
     # Build URLs for all dates and trains
