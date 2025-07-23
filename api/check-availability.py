@@ -10,13 +10,13 @@ trains = {"Takam":["%EF%BD%BB%EF%BD%BE%EF%BE%84%20%20000", "%EF%BD%BB%EF%BD%BE%E
           "Izumo": ["%EF%BD%BB%EF%BD%B2%EF%BD%BD%EF%BE%93%20000", "%EF%BD%BB%EF%BD%B2%EF%BD%BD%EF%BE%93%EF%BD%BB000"],
          "Every": ["%EF%BD%BB%EF%BD%BE%EF%BE%84%20%20000", "%EF%BD%BB%EF%BD%BE%EF%BE%84%EF%BD%BB%20000", "%EF%BD%BB%EF%BD%B2%EF%BD%BD%EF%BE%93%20000", "%EF%BD%BB%EF%BD%B2%EF%BD%BD%EF%BE%93%EF%BD%BB000"]}
 
-seats = {'3010000': "Ordinary",
-'4110042': "Sleeper B Non Smoking",
-'4120042': "Sleeper B Smoking",
-'2110002': "Sleeper A Non Smoking",
-'2120002': "Sleeper A Smoking",
-'4110062': "Sleeper B Twin Non Smoking",
-'4120062': "Sleeper B Twin Smoking"}
+seats = {'3010000': "🅾 Ordinary Car",
+'4110042': "🅱 Sleeper B 寝台 Non Smoking 🚭",
+'4120042': "🅱 Sleeper B 寝台 Smoking 🚬",
+'2110002': "🅰 Sleeper A 寝台 Non Smoking 🚭",
+'2120002': "🅰 Sleeper A 寝台 Smoking 🚬",
+'4110062': "🅱 Sleeper B 寝台 Twin Non Smoking 🚭",
+'4120062': "🅱 Sleeper B 寝台 Twin Smoking 🚬"}
 
 # Browser-like headers without cookies
 HEADERS = {
