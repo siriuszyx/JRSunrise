@@ -50,6 +50,18 @@ def process_single_url(date, url, train_names_shared):
         res = session.get(url, headers=HEADERS, timeout=30)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, "html.parser")
+
+            # Check for error message first
+            error_div = soup.find("div", class_="error-message")
+            if error_div:
+                error_message = error_div.get_text(strip=True)
+                print(f"Error found for date {date}: {error_message}")
+                return date, [{
+                    "error": True,
+                    "errorMessage": error_message,
+                    "link": url
+                }], local_train_names
+                      
             train_names = soup.select("div.route-train-list__train-name.express")
             
             # Check if we should skip processing
