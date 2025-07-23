@@ -114,8 +114,15 @@ def checkAvailability(data):
         datesEnd = [str(d) for d in range(int(str(endDate)[:6]+"01"), endDate+1)]
         dates = datesStart + datesEnd
 
+    departHour = "18"
+    # Generate departHour
+    if departStName[:5] in ("Sanno", "Osaka", "Shizu"):
+        departHour = "00"
+    elif departStName[:5] in ("Okayam", "Himeji") and arriveStName[:8] in ("Takamats", "Izumoshi"):
+        departHour = "05"
+              
     # Build URLs for all dates and trains
-    url_template = "https://e5489.jr-odekake.net/e5489/ibpc/CBDayTimeArriveSelRsvMyDiaPC?inputType=0&inputHour=12&inputMinute=00&inputUniqueDepartSt=1&inputUniqueArriveSt=1&inputSearchType=2&inputSpecificTrainType1=2&inputReturnUrl=travel-information/en/tickets-passes/route-search/&SequenceType=1&LANG=en"
+    url_template = f"https://e5489.jr-odekake.net/e5489/ibpc/CBDayTimeArriveSelRsvMyDiaPC?inputType=0&inputHour={departHour}&inputMinute=00&inputUniqueDepartSt=1&inputUniqueArriveSt=1&inputSearchType=2&inputSpecificTrainType1=2&inputReturnUrl=travel-information/en/tickets-passes/route-search/&SequenceType=1&LANG=en"
     
     # Prepare all URL tasks
     url_tasks = []
