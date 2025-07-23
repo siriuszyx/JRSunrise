@@ -184,7 +184,7 @@ const App = () => {
 
     // Start date: reference day to one month from reference day (inclusive)
     const startMin = new Date(referenceDay);
-    const startMax = new Date(referenceDay);
+    const startMax = new Date(jstNow);
     startMax.setMonth(startMax.getMonth() + 1);
   
     setMinStartDate(formatDate(startMin));
